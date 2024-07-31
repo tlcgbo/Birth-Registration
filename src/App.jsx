@@ -6,6 +6,8 @@ import About from './components/About';
 import Birth from './components/Birth';
 import Contact from './components/Contact';
 import Login from './components/Login';
+import Register from './components/Register';
+
 
 
 
@@ -18,8 +20,9 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/birth' element={<Birth />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
+      
     </div>
       
     

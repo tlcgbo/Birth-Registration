@@ -4,56 +4,44 @@ import { motion } from 'framer-motion'
 
 const Homepage = () => {
   return (
-    <div className='overflow-x-hidden'>
-      <div className='container mx-auto px-10'>
-        <div className='mx-4 flex flex-wrap'>
-          <div>
-          <motion.div
-                            variants={{
-                                visible: { opacity: 1, y: 0 },
-                                hidden: { opacity: 0, y: 75 },
-                            }}
-                            initial="hidden"
-                            animate="visible"
-                            transition={{ duration: 0.5, delay: 0.25 }}
-                        >
-                            <h1 className=' text-center text-transparent bg-clip-text text-purple-950 sm:text-8xl text-4xl from-black p-10 mb-3  font-bold leading-snug sm:text-[42px] lg:text-[40px] xl:text-[42px]'>
-                                Birth
-                                 <br />
-                                <span className=" text-white sm:text-8xl text-6xl">
-                                     Registration
-                                 </span>
-                            </h1>
-                            <p className='bg-slate-600 p-10 text-white text-2xl mb-8  max-w-[480px] sm:text-base'>
-                            Welcome to Birth Registrar, your trusted partner in the journey of life.
-                             Our platform is dedicated to making the process of birth registration seamless, secure, and convenient. Whether
-                              you are a proud new parent or a responsible guardian, we are here to ensure that the first step in your child's legal identity
-                               is handled with care and precision. With our user-friendly interface and commitment to privacy, registering a birth has never been easier.
-                                Join us in celebrating new beginnings
-                                and safeguarding the future of our newest generations. Welcome to the family!
-                            </p>
-                        </motion.div>
-                        <motion.div
-                            variants={{
-                            visible: { opacity: 1, x: 0 },
-                            hidden: { opacity: 0, x: -75 },
-                             }}
-                             initial="hidden"
-                            animate="visible"
-                             transition={{ duration: 0.5, delay: 0.25 }}
-                        >
-                        <ul class="flex flex-wrap items-center">
-                            <li>
-                                <Link
-                                     to="#"
-                                    class="bg-blue-400 inline-flex items-center justify-center rounded-lg py-4 px-6 text-center text-base font-normal text-white hover:bg-blue-500 sm:px-10 lg:px-8 xl:px-10"
-                                >
-                                 Get Started
-                                </Link>
-                            </li>
-                            </ul>
-                            </motion.div>
-                        
+    <div className='min-h-screen  text-white'>
+      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex flex-wrap justify-center pt-16 md:pt-24 lg:pt-32'>
+          <div className='w-full lg:w-2/3'>
+
+            <motion.div
+              variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 75 },
+              }}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: 0.5, delay: 0.25 }}
+            >
+
+              <div className='p-10'>
+
+              <h1 className='text-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight'>
+                Birth  <h1 className='text-purple-500'>Registration</h1>
+              </h1>
+
+              <p className='mt-6 text-black  text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed'>
+                Welcome to Birth Registration. Here you can register your baby within 42 days of
+                birth in England, Wales, Northern Ireland and 24 days in Scotland. You must register your baby before you can get a birth certificate. It is best to register the birth at the register office in the district where the baby was born. A birth certificate is a vital record that documents the birth of a person. The term "birth certificate" can refer to either the original document certifying the circumstances of the birth or to a certified copy or representation of the ensuing registration of that birth.
+              </p>
+
+              </div>
+              
+              
+              <div className='mt-10'>
+                <Link 
+                  to="/register" 
+                  className='inline-block bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-xl md:text-2xl'
+                >
+                  Register
+                </Link>
+              </div>
+            </motion.div>
 
           </div>
         </div>

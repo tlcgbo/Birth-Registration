@@ -1,35 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  }
+
   return (
-    <nav className=' font-sans-serif font-semibold bg-indigo-950 nav-full sticky top-0 flex md:flex justify-between pt-5 z-10 h-[8vh]'>
-      <div className=' nav-container flex justify-between w-[75%] mx-auto'>
-     
-      <Link to="/">
-          <span className="bg-green-950 p-3 ml-2 mt-2 sm:mt-0 text-white font-semibold text-xl">
+    <nav className='bg-indigo-950 text-white sticky top-0 z-10'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex items-center justify-between h-16'>
+          <div className='flex items-center'>
+            <Link to="/" className="text-white font-semibold text-xl hover:text-purple-500">
               Birth Registration
-            </span>
-          </Link>
-      
-        <ul className=' text-white  flex justify-around w-[10cm]  pt-2 text-[18px]'>
-          <Link to="/">
-              <li className='hover:text-green-700 '>Home</li>
-          </Link>
-          <Link to="/contact">
-              <li className='hover:text-green-700'>Contact</li>
-          </Link>
-          <Link to="/about">
-              <li className='hover:text-green-700'>About</li>
-          </Link>
-          <Link to="/birth">
-              <li className='hover:text-green-700'>Birth</li>
-          </Link>
-          <Link to="/login">
-              <li className='hover:text-green-700'>Login</li>
-          </Link>
-        </ul>
+            </Link>
+          </div>
+          <div className='flex md:hidden'>
+            <button onClick={toggleMenu} className='text-white hover:text-gray-300 focus:outline-none'>
+              {/* Icon for the hamburger menu */}
+              <svg className='h-6 w-6' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h16m-7 6h7' />
+              </svg>
+            </button>
+          </div>
+          <div className={`md:flex md:items-center ${isOpen ? 'block' : 'hidden'} w-full md:w-auto`}>
+            <ul className='flex flex-col md:flex-row md:space-x-6 text-center md:text-left'>
+              <Link to="/" onClick={() => setIsOpen(false)}>
+                <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Home</li>
+              </Link>
+              <Link to="/contact" onClick={() => setIsOpen(false)}>
+                <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Contact</li>
+              </Link>
+              <Link to="/about" onClick={() => setIsOpen(false)}>
+                <li className='hover:text-green-700 mx-2 my-2 md:my-0'>About</li>
+              </Link>
+              <Link to="/birth" onClick={() => setIsOpen(false)}>
+                <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Birth</li>
+              </Link>
+              <Link to="/register" onClick={() => setIsOpen(false)}>
+                <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Register</li>
+              </Link>
+            </ul>
+          </div>
+        </div>
       </div>
     </nav>
   )
