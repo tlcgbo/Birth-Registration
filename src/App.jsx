@@ -7,6 +7,7 @@ import Birth from './components/Birth';
 import Contact from './components/Contact';
 import Login from './components/Login';
 import Register from './components/Register';
+import Footer from './components/Footer';
 
 
 
@@ -22,7 +23,7 @@ const App = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/register' element={<Register />} />
       </Routes>
-      
+      <Footer />
     </div>
       
     
