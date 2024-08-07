@@ -36,7 +36,7 @@ function Navbar({handleSignOut, isAuth}) {
               <Link to="/contact" onClick={() => setIsOpen(false)}>
                 <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Contact</li>
               </Link>
-              <Link to="/birth" onClick={() => setIsOpen(false)}>
+              <Link to="/about" onClick={() => setIsOpen(false)}>
                 <li className='hover:text-green-700 mx-2 my-2 md:my-0'>About</li>
               </Link>
               

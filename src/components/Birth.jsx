@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db, auth } from "../firebase-config";
+import { Navigate, useNavigate } from "react-router-dom";
 
-const Birth = () => {
+const Birth = ({isAuth}) => {
 
   
+
   return (
     <div className=" min-h-screen flex items-center justify-center">
-      <div className="bg-indigo-950 p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-3xl font-semibold text-purple-500 mb-6 text-center">Birth Registration Form</h2>
+      
+      <div className="bg-indigo-950 p-8 rounded-lg shadow-lg w-1/3 ">
+        <h2 className="text-3xl font-semibold text-purple-500 mb-6 text-center">Register Your Baby</h2>
         <form>
           <div className="mb-4">
             <label className="block text-gray-300 mb-2" >Mother's Name</label>
