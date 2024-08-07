@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase-config';
 
-const Navbar = () => {
+function Navbar({handleSignOut, isAuth}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -9,7 +11,8 @@ const Navbar = () => {
   }
 
   return (
-    <nav className='bg-indigo-950 text-white sticky top-0 z-10'>
+    <div>
+      <nav className='bg-indigo-950 text-white sticky top-0 z-10'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16'>
           <div className='flex items-center'>
@@ -33,20 +36,32 @@ const Navbar = () => {
               <Link to="/contact" onClick={() => setIsOpen(false)}>
                 <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Contact</li>
               </Link>
-              <Link to="/about" onClick={() => setIsOpen(false)}>
+              <Link to="/birth" onClick={() => setIsOpen(false)}>
                 <li className='hover:text-green-700 mx-2 my-2 md:my-0'>About</li>
               </Link>
-              <Link to="/birth" onClick={() => setIsOpen(false)}>
-                <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Birth</li>
-              </Link>
-              <Link to="/register" onClick={() => setIsOpen(false)}>
-                <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Register</li>
-              </Link>
+              
+
+              {
+                !isAuth ? (
+                  <Link to="/register" onClick={() => setIsOpen(false)}>
+                    <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Register</li>
+                  </Link>
+                ) : (
+                  <>
+                    <Link to="/birth" onClick={() => setIsOpen(false)}>
+                      <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Birth</li>
+                    </Link>
+                    <button onClick={handleSignOut} className='hover:text-white mx-2 my-2 md:my-0'>Sign Out</button>
+                  </>
+                )
+              }
             </ul>
           </div>
         </div>
       </div>
     </nav>
+    </div>
+    
   )
 }
 
