@@ -6,22 +6,33 @@ import About from './components/About';
 import Birth from './components/Birth';
 import Contact from './components/Contact';
 import Login from './components/Login';
-import Register from './components/Register';
 import Footer from './components/Footer';
+import { signOut } from 'firebase/auth';
+import { auth } from './firebase-config';
+import { useEffect, useState } from 'react';
 
 
+function App() {
 
+  const [isAuth, setIsAuth] = useState(localStorage.getItem('isAuth'));
 
-const App = () => {
+  const signUserOut = () => {
+    signOut(auth).then(() => {
+      localStorage.clear();
+      setIsAuth(false);
+    window.location.pathname = "/login"
+    })
+  }
+
   return (
     <div>
-      <Navbar />
+      <Navbar handleSignOut={signUserOut} isAuth={isAuth}/>
       <Routes>
-        <Route path='/' element={<Homepage />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/birth' element={<Birth />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/' element={<Homepage isAuth={isAuth} />} />
+        <Route path='/about' element={<About isAuth={isAuth} />} />
+        <Route path='/birth' element={<Birth isAuth={isAuth} />} />
+        <Route path='/contact' element={<Contact isAuth={isAuth} />} />
+        <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
       </Routes>
       <Footer />
     </div>

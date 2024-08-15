@@ -35,12 +35,15 @@ const Homepage = () => {
               
               <div className='mt-10'>
                 <Link 
-                  to="/register" 
+                  to="/login" 
                   className='inline-block bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-lg text-xl md:text-2xl'
                 >
                   Register
                 </Link>
               </div>
+
+             
+
             </motion.div>
 
           </div>

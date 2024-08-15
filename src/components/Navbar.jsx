@@ -43,18 +43,19 @@ function Navbar({handleSignOut, isAuth}) {
 
               {
                 !isAuth ? (
-                  <Link to="/register" onClick={() => setIsOpen(false)}>
-                    <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Register</li>
+                  <Link to="/login" onClick={() => setIsOpen(false)}>
+                    <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Login</li>
                   </Link>
                 ) : (
                   <>
                     <Link to="/birth" onClick={() => setIsOpen(false)}>
                       <li className='hover:text-green-700 mx-2 my-2 md:my-0'>Birth</li>
                     </Link>
-                    <button onClick={handleSignOut} className='hover:text-white mx-2 my-2 md:my-0'>Sign Out</button>
+                    <button onClick={handleSignOut} className='hover:text-red-700 mx-2 my-2 md:my-0'>Sign Out</button>
                   </>
                 )
               }
+              
             </ul>
           </div>
         </div>
