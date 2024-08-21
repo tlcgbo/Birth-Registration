@@ -101,20 +101,7 @@ const Birth = () => {
                 }}
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-300 mb-2">Fundal Height (cm)</label>
-              <input
-                className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                type="number"
-                id="fundalHeight"
-                name="fundalHeight"
-                required
-
-                onChange={(e) => {
-                  setFundalHeight(e.target.value);
-                }}
-              />
-            </div>
+            
             <div className="mb-4">
               <label className="block text-gray-300 mb-2">Address</label>
               <input
