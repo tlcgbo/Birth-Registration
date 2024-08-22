@@ -1,8 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
+import { getDocs, collection, deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { db, auth } from '../firebase-config';
 
-const Homepage = () => {
+
+
+const Homepage = ({ isAuth }) => {
+
+  const [birthLists, setBirthList] = useState([])
+
+  const birthCollectionRef = collection(db, "birth")
+
+  useEffect(() => {
+    const getBirths = async () => {
+      const data = await getDocs(birthCollectionRef)
+      setBirthList(data.docs.map((doc) => ({...doc.data(), id:doc.id})))
+    }
+    getBirths();
+  },[])
+
+  const deleteBirth  = async (id) => {
+    const birthDoc = doc(db, "birth", id)
+    await deleteDoc(birthDoc)
+  }
+
   return (
     <div className='min-h-screen text-white'>
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
@@ -50,21 +70,30 @@ const Homepage = () => {
 
 
             <div className='w-[100%]  min-h-[calc(100vh - 80px)] h-auto flex flex-col items-center py-[120px]'>
-              <div className='w-[65vw] h-[auto] max-h-[600px] shadow-2xl  m-[20px] p-[20px] bg-purple-900 text-white'>
-                <div>
-                  {/* {} */}
-                </div>
-              
-              <div className=''>
-                <h1>Mother's Name: </h1>
-                <h1 className=''>Father's Name: </h1>
-                <h1>Child's Name Name: </h1>
-                <h1 className=''>Child's Weight(kg): </h1>
-                <h1>Address: </h1>
+              {birthLists.map((birth) => {
+                return(
+                  <div key={birth.id} className='w-[65vw] h-[auto] max-h-[600px] shadow-2xl  m-[20px] p-[20px] bg-purple-900 text-white'>
 
-                <h3></h3>
+
+                    <div className=''>
+                      {isAuth && birth.author.id === auth.currentUser.uid && <button onClick={() => {deleteBirth(birth.id)} }> &#128465; </button>}
+                    </div>
+
+              
+                    <div className='h-[60%] max-h-[400px] w-[100%] overflow-hidden overflow-y-auto scroll-smooth'>
+                      
+                      <h1>Mother's Name: {birth.motherName} </h1>
+                      <h1 className=''>Father's Name: {birth.fatherName} </h1>
+                      <h1>Child's Name Name: {birth.childName}</h1>
+                      <h1 className=''>Child's Weight(kg): {birth.childWeight}</h1>
+                      <h1>Address: {birth.address}</h1>
+
+                      <h3></h3>
+                    </div>
               </div>
-              </div>
+                )
+              })}
+              
             </div>
 
           </div>
