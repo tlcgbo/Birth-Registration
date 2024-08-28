@@ -7,12 +7,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCjNKyKFCyo8tcQOnx8NMTjGGYHEgVSA-Q",
-  authDomain: "birth-registration-fecf6.firebaseapp.com",
-  projectId: "birth-registration-fecf6",
-  storageBucket: "birth-registration-fecf6.appspot.com",
-  messagingSenderId: "810952949914",
-  appId: "1:810952949914:web:f1c5416857aee5820fdf23"
+  apiKey: "AIzaSyAdSuBUdUNfXcDbPh4N8AAygre7zqY1ncs",
+  authDomain: "birth-registration-4ae7a.firebaseapp.com",
+  projectId: "birth-registration-4ae7a",
+  storageBucket: "birth-registration-4ae7a.appspot.com",
+  messagingSenderId: "935681330205",
+  appId: "1:935681330205:web:d7747a72800a1471338af4"
 };
 
 // Initialize Firebase
