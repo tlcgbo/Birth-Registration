@@ -6,26 +6,30 @@ import { collection, addDoc } from "firebase/firestore";
 
 const Birth = () => {
 
-  const [motherName, setMotherName] = useState("");
-  const [fatherName, setFatherName] = useState("");
-  const [childName, setChildName] = useState("");
+  const [motherFullName, setMotherFullName] = useState("");
+  const [fatherFullName, setFatherFullName] = useState("");
+  const [childFullName, setChildFullName] = useState("");
   const [childWeight, setChildWeight] = useState("");
-  const [fundalHeight, setFundalHeight] = useState("");
+  const [placeBirth, setPlaceBirth] = useState("");
   const [address, setAddress] = useState("");
+  const [gender, setGender] = useState("");
 
   let navigate = useNavigate()
 
   const birthCollectionRef = collection(db, "birth")
-  const registerBirth = async () => {
+  const registerBirth = async (e) => {
+    e.preventDefault();
     await addDoc(birthCollectionRef, {
-      motherName,
-      fatherName,
-      childName,
+      motherFullName,
+      fatherFullName,
+      childFullName,
       childWeight,
-      fundalHeight,
+      placeBirth,
       address,
+      gender,
       author: {name: auth.currentUser.displayName, id: auth.currentUser.uid }
     })
+   
     navigate('/')
   }
 
@@ -44,46 +48,46 @@ const Birth = () => {
           <h2 className="text-3xl font-semibold text-purple-500 mb-6 text-center">
             Register Your Baby
           </h2>
-          <form>
+          <form onSubmit={registerBirth}>
             <div className="mb-4">
-              <label className="block text-gray-300 mb-2">Mother's Name</label>
+              <label className="block text-gray-300 mb-2">Mother's Full Name</label>
               <input
                 className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 type="text"
-                id="motherName"
-                name="motherName"
+                id="motherFullName"
+                name="motherFullName"
                 required
 
                 onChange={(e) => {
-                  setMotherName(e.target.value);
+                  setMotherFullName(e.target.value);
                 }}
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-300 mb-2">Father's Name</label>
+              <label className="block text-gray-300 mb-2">Father's Full Name</label>
               <input
                 className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 type="text"
-                id="fatherName"
-                name="fatherName"
+                id="fatherFullName"
+                name="fatherFullName"
                 required
 
                 onChange={(e) => {
-                  setFatherName(e.target.value);
+                  setFatherFullName(e.target.value);
                 }}
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-300 mb-2">Child's Name</label>
+              <label className="block text-gray-300 mb-2">Child's Full Name</label>
               <input
                 className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 type="text"
-                id="childName"
-                name="childName"
+                id="childFullName"
+                name="childFullName"
                 required
 
                 onChange={(e) => {
-                  setChildName(e.target.value);
+                  setChildFullName(e.target.value);
                 }}
               />
             </div>
@@ -103,6 +107,21 @@ const Birth = () => {
             </div>
             
             <div className="mb-4">
+              <label className="block text-gray-300 mb-2">Place of Birth</label>
+              <input
+                className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                type="text"
+                id="placeBirth"
+                name="placeBirth"
+                required
+
+                onChange={(e) => {
+                  setPlaceBirth(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="mb-4">
               <label className="block text-gray-300 mb-2">Address</label>
               <input
                 className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
@@ -116,10 +135,31 @@ const Birth = () => {
                 }}
               />
             </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-300 mb-2">Gender</label>
+              <select className="w-full p-3 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                 name="gender"
+                  id="gender"
+                  onChange={(e) => {
+                    setGender(e.target.value);
+                  }}
+                  >
+
+                <option value="">-Select Gender-</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+        
+                
+              </select>
+
+               
+             
+            </div>
             <button
               type="submit"
               className="w-full bg-purple-700 text-white py-3 rounded-lg font-bold hover:bg-purple-500 transition duration-300"
-              onClick={registerBirth}
+            
             >
               Register
             </button>

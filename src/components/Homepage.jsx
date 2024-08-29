@@ -16,10 +16,10 @@ const Homepage = ({ isAuth }) => {
     getBirths();
   },[])
 
-  // const deleteBirth  = async (id) => {
-  //   const birthDoc = doc(db, "birth", id)
-  //   await deleteDoc(birthDoc)
-  // }
+  const deleteBirth  = async (id) => {
+    const birthDoc = doc(db, "birth", id)
+    await deleteDoc(birthDoc)
+  }
 
   return (
     <div className='min-h-screen text-white'>
@@ -43,20 +43,24 @@ const Homepage = ({ isAuth }) => {
                   <div key={birth.id} className='w-[65vw] h-[auto] max-h-[600px] shadow-2xl  m-[20px] p-[20px] bg-purple-900 text-white'>
 
 
-                 
+                  <div className=''>
+                    {isAuth && birth.author.id === auth.currentUser.uid && <button onClick={() => {deleteBirth(birth.id)} }> &#128465; </button>}
+                  </div>
               
                     <div className='h-[60%] max-h-[400px] w-[100%] overflow-hidden overflow-y-auto scroll-smooth'>
                       
-                      <h1>Mother's Name: {birth.motherName} </h1>
-                      <h1 className=''>Father's Name: {birth.fatherName} </h1>
-                      <h1>Child's Name Name: {birth.childName}</h1>
+                      <h1>Mother's Full Name: {birth.motherFullName} </h1>
+                      <h1 className=''>Father's Full Name: {birth.fatherFullName} </h1>
+                      <h1>Child's Full Name: {birth.childFullName}</h1>
                       <h1 className=''>Child's Weight(kg): {birth.childWeight}</h1>
+                      <h1>Place Of Birth: {birth.placeBirth}</h1>
                       <h1>Address: {birth.address}</h1>
+                      <h1>Gender: {birth.gender}</h1>
 
                       <h3>@{birth.author?.name}</h3>
                     </div>
               </div>
-                )
+                );
               })}
               
             </div>
