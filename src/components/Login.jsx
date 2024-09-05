@@ -2,18 +2,19 @@ import { auth, provider } from "../firebase-config"
 import { signInWithPopup } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
+import GoogleBtn from "./GoogleBtn"
 
 const Login = ({ setIsAuth }) => {
 
   let navigate = useNavigate();
 
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-      localStorage.setItem("isAuth", true);
-      setIsAuth(true)
-      navigate('/')
-    })
-  }
+  // const signInWithGoogle = () => {
+  //   signInWithPopup(auth, provider).then((result) => {
+  //     localStorage.setItem("isAuth", true);
+  //     setIsAuth(true)
+  //     navigate('/')
+  //   })
+  // }
 
   return (
     <div className="loginPage">
@@ -30,15 +31,15 @@ const Login = ({ setIsAuth }) => {
       
       <p className="text-4xl p-10 text-center font-semibold text-purple-500">Welcome Back</p>  
       
-      <div className="text-lg bg-indigo-950 p-10 rounded-lg shadow-lg text-white text-center">
-        <label htmlFor="fname">Username: </label>
-        <input type="text" id="fname" name="fname" />
+      <div className="text-lg bg-indigo-950 p-10 rounded-lg shadow-lg  text-center">
+        <label className="text-white"  htmlFor="fname">Username: </label>
+        <input className="rounded-lg" type="text" id="fname" name="fname" />
         <br></br> <br></br>
-        <label htmlFor="email">Email: </label>
-        <input type="email" id="email" name="email" />
+        <label className="text-white" htmlFor="email">Email: </label>
+        <input className="rounded-lg" type="email" id="email" name="email" />
         <br></br> <br></br>
-        <label htmlFor="email">Password: </label>
-        <input type="password" id="password" name="password" />
+        <label className="text-white" htmlFor="email">Password: </label>
+        <input className="rounded-lg" type="password" id="password" name="password" />
         <br></br> <br></br>
 
         <button
@@ -49,10 +50,13 @@ const Login = ({ setIsAuth }) => {
             </button>
       </div>
       
+      <GoogleBtn setIsAuth={setIsAuth} />
 
-      <div className="text-center pb-10">
+      {/* <div className="text-center pb-10">
         <button className="login-with-google-btn" onClick={signInWithGoogle}>Sign in with Google</button>
-      </div>
+      </div> */}
+
+
       </motion.div>
     </div>
   )

@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
 import { useEffect, useState } from 'react';
+import Register from './components/Register';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path='/birth' element={<Birth isAuth={isAuth} />} />
         <Route path='/contact' element={<Contact isAuth={isAuth} />} />
         <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
+        <Route path='/register' element={<Register setIsAuth={setIsAuth} />} />
       </Routes>
       <Footer />
     </div>

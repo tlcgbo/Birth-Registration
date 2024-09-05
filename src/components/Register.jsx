@@ -2,18 +2,19 @@ import { auth, provider } from "../firebase-config"
 import { signInWithPopup } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
+import GoogleBtn from "./GoogleBtn"
 
-const Login = ({ setIsAuth }) => {
+const Register = ({ setIsAuth }) => {
 
   let navigate = useNavigate();
 
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-      localStorage.setItem("isAuth", true);
-      setIsAuth(true)
-      navigate('/')
-    })
-  }
+  // const signInWithGoogle = () => {
+  //   signInWithPopup(auth, provider).then((result) => {
+  //     localStorage.setItem("isAuth", true);
+  //     setIsAuth(true)
+  //     navigate('/')
+  //   })
+  // }
 
   return (
     <div className="loginPage">
@@ -28,34 +29,38 @@ const Login = ({ setIsAuth }) => {
               transition={{ duration: 0.5, delay: 0.25 }}
             >
       
-      <p className="text-4xl p-10 text-center font-semibold text-purple-500">Welcome Back</p>  
+      <p className="text-4xl p-10 text-center font-semibold text-purple-500">Make an Account</p>  
       
-      <div className="text-lg bg-indigo-950 p-10 rounded-lg shadow-lg text-white text-center">
-        <label htmlFor="fname">Username: </label>
-        <input type="text" id="fname" name="fname" />
+      <div className="text-lg bg-indigo-950 p-10 rounded-lg shadow-lg  text-center">
+        <label className="text-white" htmlFor="fname">Username: </label>
+        <input className="rounded-lg" type="text" id="fname" name="fname" required />
         <br></br> <br></br>
-        <label htmlFor="email">Email: </label>
-        <input type="email" id="email" name="email" />
+        <label className="text-white" htmlFor="email">Email: </label>
+        <input className="rounded-lg" type="email" id="email" name="email" required />
         <br></br> <br></br>
-        <label htmlFor="email">Password: </label>
-        <input type="password" id="password" name="password" />
+        <label className="text-white" htmlFor="email">Password: </label>
+        <input className="rounded-lg" type="password" id="password" name="password" required />
+        <br></br> <br></br>
+        <label className="text-white" htmlFor="email">Confirm Password: </label>
+        <input className="rounded-lg" type="password" id="password" name="password" required/>
         <br></br> <br></br>
 
         <button
               type="submit"
               className="w-full bg-purple-700 text-white py-3 rounded-lg font-bold hover:bg-purple-500 transition duration-300"
             >
-              Login
+              Register
             </button>
       </div>
       
+      <GoogleBtn setIsAuth={setIsAuth} />
 
-      <div className="text-center pb-10">
-        <button className="login-with-google-btn" onClick={signInWithGoogle}>Sign in with Google</button>
-      </div>
+      {/* <div className="text-center pb-10">
+        <button className="login-with-google-btn" onClick={signInWithGoogle}>Sign up with Google</button>
+      </div> */}
       </motion.div>
     </div>
   )
 }
 
-export default Login
+export default Register
