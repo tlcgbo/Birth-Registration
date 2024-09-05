@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../firebase-config';
+import { motion } from 'framer-motion';
 
 const Homepage = ({ isAuth }) => {
 
@@ -26,6 +27,16 @@ const Homepage = ({ isAuth }) => {
       <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex flex-wrap justify-center pt-16 md:pt-24 lg:pt-32'>
           <div className='w-full lg:w-2/3'>
+
+          <motion.div
+              variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 75 },
+              }}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: 0.5, delay: 0.25 }}
+            >
             <div className='p-10'>
               <h1 className='text-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight'>
                 Birth <span className='text-purple-500'>Registration</span>
@@ -64,7 +75,7 @@ const Homepage = ({ isAuth }) => {
               })}
               
             </div>
-
+            </motion.div>
           </div>
         </div>
       </div>
