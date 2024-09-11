@@ -6,6 +6,8 @@ import GoogleBtn from "./GoogleBtn"
 
 const Login = ({ setIsAuth }) => {
 
+  
+
   let navigate = useNavigate();
 
   // const signInWithGoogle = () => {

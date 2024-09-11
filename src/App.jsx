@@ -11,6 +11,8 @@ import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
 import { useEffect, useState } from 'react';
 import Register from './components/Register';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
 
   return (
     <div>
+      <ToastContainer position='top-right' theme='colored' />
       <Navbar handleSignOut={signUserOut} isAuth={isAuth}/>
       <Routes>
         <Route path='/' element={<Homepage isAuth={isAuth} />} />
