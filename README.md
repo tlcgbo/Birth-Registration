@@ -7,4 +7,6 @@
         Child's Name:
         Child's Weight(kg):
         Address:
+
+    We use firebase to store your data safely and securely
 </p>

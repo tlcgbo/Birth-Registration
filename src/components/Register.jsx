@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import GoogleBtn from "./GoogleBtn"
 import { useState } from "react"
 import { toast } from "react-toastify"
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 
 const initialState = {
   username: '',
@@ -34,8 +34,22 @@ const Register = ({ setIsAuth }) => {
     e.preventDefault();
 
     if(validateForm()){
-      console.log("It's working");
+      try {
+        if(username && email && password) {
+          const {user} = await createUserWithEmailAndPassword(
+            auth, email, password
+          );
+          await updateProfile(user, {displayName: `${username}`})
+          toast.success('signup successfully');
+          localStorage.setItem('isAuth', true);
+          setIsAuth(true);
+          navigate("/");
+        }
+      } catch (error) {
+        toast.error('user already exists');
+        console.log(error);
 
+      }
     }
   }
 
@@ -59,11 +73,12 @@ const Register = ({ setIsAuth }) => {
       <p className="text-4xl p-10 text-center font-semibold text-purple-500">Make an Account</p>  
       
       <div className="text-lg bg-indigo-950 p-10 rounded-lg shadow-lg  text-center">
-        <form onSubmit={handleSubmit} className="text-black">
+        <form  onSubmit={handleSubmit} className=" text-black">
           <label className="text-white">Username: </label>
           
           <input 
-          className="rounded-lg" 
+          className="rounded-lg p-1 text" 
+          placeholder="Enter username"
           type="text" 
           name="username"
           value={username}
@@ -74,17 +89,21 @@ const Register = ({ setIsAuth }) => {
           <label className="text-white"> Email: </label>
 
           <input 
-          className="rounded-lg" 
+          className="rounded-lg p-1" 
+          placeholder="Enter email"
           type="email" 
           name="email"
           value={email}
           onChange={handleChange}
           />
+         
 
           <br></br> <br></br>
           <label className="text-white">Password: </label>
           
-          <input className="rounded-lg"
+          <input 
+          className="rounded-lg p-1"
+          placeholder="Enter password"
           type="password"
           name="password" 
           value={password}
@@ -94,7 +113,9 @@ const Register = ({ setIsAuth }) => {
           <br></br> <br></br>
           <label className="text-white">Confirm Password: </label>
           
-          <input className="rounded-lg" 
+          <input 
+          className="rounded-lg p-1" 
+          placeholder="Confirm password"
           type="password" 
           name="confirmPassword" 
           value={confirmPassword}
