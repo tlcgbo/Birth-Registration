@@ -33,7 +33,7 @@ const Register = ({ setIsAuth }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(validateForm()){
+      validateForm();
       try {
         if(username && email && password) {
           const {user} = await createUserWithEmailAndPassword(
@@ -51,7 +51,7 @@ const Register = ({ setIsAuth }) => {
 
       }
     }
-  }
+ 
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value.trim()});
@@ -78,7 +78,7 @@ const Register = ({ setIsAuth }) => {
           
           <input 
           className="rounded-lg p-1 text" 
-          placeholder="Enter username"
+          placeholder="Username"
           type="text" 
           name="username"
           value={username}

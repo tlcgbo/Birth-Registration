@@ -3,20 +3,54 @@ import { signInWithPopup } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import GoogleBtn from "./GoogleBtn"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { toast } from "react-toastify"
+import { useState } from "react"
+import { Link } from "react-router-dom"
+
+const initialState = {
+  email: '',
+  password: '',
+}
+
 
 const Login = ({ setIsAuth }) => {
 
-  
+  const [formData, setFormData] = useState(initialState);
+
+  const {email, password} = formData;
 
   let navigate = useNavigate();
 
-  // const signInWithGoogle = () => {
-  //   signInWithPopup(auth, provider).then((result) => {
-  //     localStorage.setItem("isAuth", true);
-  //     setIsAuth(true)
-  //     navigate('/')
-  //   })
-  // }
+  const validateForm = () => {
+    if(!email || !password){
+      toast.error("Please, fill in all input fields")
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    validateForm();
+    try{
+      if(email && password) {
+        const {user} = await signInWithEmailAndPassword(
+          auth, email, password
+        );
+        localStorage.setItem('isAuth', true);
+        toast.success('log in successfully');
+        setIsAuth(true);
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error('invalid credentials');
+      console.log(error)
+    }
+  }
+
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name]: e.target.value});
+  };
 
   return (
     <div className="loginPage">
@@ -34,14 +68,31 @@ const Login = ({ setIsAuth }) => {
       <p className="text-4xl p-10 text-center font-semibold text-purple-500">Welcome Back</p>  
       
       <div className="text-lg bg-indigo-950 p-10 rounded-lg shadow-lg  text-center">
-        <label className="text-white"  htmlFor="fname">Username: </label>
-        <input className="rounded-lg" type="text" id="fname" name="fname" />
+        <form onSubmit={handleSubmit} className="text-black">
+
+        <label className="text-white">Email: </label>
+
+        <input 
+        className="rounded-lg p-1" 
+        placeholder="Email"
+        type="email" 
+        name="email"
+        value={email}
+        onChange={handleChange}
+        />
+
         <br></br> <br></br>
-        <label className="text-white" htmlFor="email">Email: </label>
-        <input className="rounded-lg" type="email" id="email" name="email" />
-        <br></br> <br></br>
-        <label className="text-white" htmlFor="email">Password: </label>
-        <input className="rounded-lg" type="password" id="password" name="password" />
+        <label className="text-white">Password: </label>
+
+        <input 
+        className="rounded-lg p-1" 
+        placeholder="password"
+        type="password"
+        name="password"
+        value={password}
+        onChange={handleChange}
+         />
+
         <br></br> <br></br>
 
         <button
@@ -50,13 +101,14 @@ const Login = ({ setIsAuth }) => {
             >
               Login
             </button>
+        </form>
+       
       </div>
       
       <GoogleBtn setIsAuth={setIsAuth} />
 
-      {/* <div className="text-center pb-10">
-        <button className="login-with-google-btn" onClick={signInWithGoogle}>Sign in with Google</button>
-      </div> */}
+      <p className='my-4'>Don't have an account? <Link className='text-purple-800 underline' to={'/register'}>sign up</Link></p>
+     
 
 
       </motion.div>
