@@ -38,7 +38,7 @@ const Login = ({ setIsAuth }) => {
           auth, email, password
         );
         localStorage.setItem('isAuth', true);
-        toast.success('log in successfully');
+        toast.success('log in successfully')
         setIsAuth(true);
         navigate("/");
       }
